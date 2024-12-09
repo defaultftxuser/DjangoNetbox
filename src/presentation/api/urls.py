@@ -15,8 +15,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.conf.urls.static import static
 from django.urls import path
+
+from src.infra.settings import settings
+from src.presentation.api.devices.views import dadata_suggest
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path('api/dadata/suggest/', dadata_suggest, name='dadata_suggest'),
 ]
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])
