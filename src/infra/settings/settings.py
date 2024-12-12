@@ -30,9 +30,9 @@ def get_env():
 SECRET_KEY = "django-insecure-cf$4ebzbfdo8a2_a!8yg47&d8x+18ms8&^b!3wz#w6+2)4cody"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["localhost"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 
 # Application definition
@@ -45,9 +45,10 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
-    "src.presentation.apps.device_app",
-
     "rest_framework",
+    'rest_framework.authtoken',
+
+    "src.presentation.apps.device_app",
 
 ]
 
@@ -141,3 +142,13 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
